@@ -6,5 +6,6 @@ from . import views
 app_name='department_app'
 
 urlpatterns = [
-    path('second_path/', views.second_view, name="second_path" )
+    path('new_department/', views.NewDepartmentView.as_view(), name="new_department"),
+
 ]

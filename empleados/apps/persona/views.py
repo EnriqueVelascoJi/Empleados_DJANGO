@@ -1,4 +1,5 @@
 from django.db.models import query
+from django.forms.forms import Form
 from django.shortcuts import render
 
 from django.views.generic import (
@@ -7,8 +8,10 @@ from django.views.generic import (
                                     CreateView,
                                     TemplateView,
                                     UpdateView,
-                                    DeleteView
+                                    DeleteView,
+                                    FormView
                                 )
+from django.views.generic.edit import FormView
 
 #Import models
 from .models import Habilidades, Person
@@ -179,7 +182,6 @@ class EmpleadoUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 #Delete
-
 class EmpleadoDeleteView(DeleteView):
     model = Person
     #El templete sirve como confirmación de la elimnación
@@ -190,3 +192,4 @@ class EmpleadoDeleteView(DeleteView):
     #Intersección del formulario previo a su eliminación
     def delete(self, request, *args: str, **kwargs):
         return super().delete(request, *args, **kwargs)
+

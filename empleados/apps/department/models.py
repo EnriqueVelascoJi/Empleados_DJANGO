@@ -5,7 +5,7 @@ class Department(models.Model):
     """Model definition for Department."""
 
     # TODO: Define fields here
-    name = models.CharField('Mame', max_length=50)
+    name = models.CharField('Name', max_length=50)
     short_name = models.CharField('Short name', max_length=50)
     anulate = models.BooleanField('Anulate', default=False)
 
