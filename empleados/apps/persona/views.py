@@ -1,10 +1,20 @@
 from django.db.models import query
 from django.shortcuts import render
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import (
+                                    ListView,
+                                    DetailView,
+                                    CreateView,
+                                    TemplateView,
+                                    UpdateView,
+                                    DeleteView
+                                )
 
 #Import models
 from .models import Habilidades, Person
+
+#Ayuda al redireccionamiento de url´s
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -90,8 +100,8 @@ class ListHabilidades(ListView):
         habilidades = empleado.habilidades.all()    
         return habilidades
 
-
-class PersonDetailView(DetailView):
+#Detalle de un empleado
+class EmpleadoDetailView(DetailView):
     model = Person
     template_name = "Person/detailPerson.html"
 
@@ -99,8 +109,84 @@ class PersonDetailView(DetailView):
 
     #slug -- Mejora en el posicionamiento (SEO)
     
+    #Método de edicición del contexto
     def get_context_data(self, **kwargs):
-        context = super(PersonDetailView, self).get_context_data(**kwargs)
+        context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo'] = 'Empelado del Mes'
         return context
+
+
+class Success(TemplateView):
+    template_name = "Person/success.html"
+
+#Creación
+class EmpleadoCreateView(CreateView):
+    model = Person
+    template_name = "Person/addEmpleado.html"
+
+    #Campos que queremos registrar por defecto
+    # fields = ['first_name','job']
+    fields = ('__all__')
+
+    #Vista de redireccionamiento una vez se haya agregado
+    #Redireccionameinto a la mimsa URL
+    # success_url = '.'
+    success_url = reverse_lazy('person_app:success')
+
+    #Validamos el formulario
+    def form_valid(self, form):
+        #Lógica del proceso
+        empleado = form.save()
+        return super().form_valid(form)
     
+    #En caso de haber errores
+    def form_invalid(self, form):
+        """If the form is invalid, render the invalid form."""
+        return self.render_to_response(self.get_context_data(form=form))
+
+#Update 
+
+class EmpleadoUpdateView(UpdateView):
+    model = Person
+    template_name = "Person/update.html"
+
+    fields = ('__all__')
+
+   #Vista de redireccionamiento una vez se haya agregado
+    #Redireccionameinto a la mimsa URL
+    # success_url = '.'
+    success_url = reverse_lazy('person_app:success')
+
+    #Intersectamos los datos del formulario antes de que sean
+    #validados y/o guardados para rutinas previas
+    def post(self, request, *args: str, **kwargs):
+        self.object = self.get_object()
+        print('==============')
+        print(request.POST)
+        first_name = request.POST['first_name']
+        print(first_name)
+        return super().post(request, *args, **kwargs)
+
+    #Validamos el formulario
+    def form_valid(self, form):
+        #Lógica del proceso
+        empleado = form.save()
+        return super().form_valid(form)
+    
+    #En caso de haber errores
+    def form_invalid(self, form):
+        """If the form is invalid, render the invalid form."""
+        return self.render_to_response(self.get_context_data(form=form))
+
+#Delete
+
+class EmpleadoDeleteView(DeleteView):
+    model = Person
+    #El templete sirve como confirmación de la elimnación
+    template_name = "Person/delete.html"
+
+    success_url = reverse_lazy('person_app:success')
+
+    #Intersección del formulario previo a su eliminación
+    def delete(self, request, *args: str, **kwargs):
+        return super().delete(request, *args, **kwargs)
