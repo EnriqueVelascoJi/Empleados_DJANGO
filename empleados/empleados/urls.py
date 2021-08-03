@@ -18,12 +18,12 @@ from django.urls import path, include
 from django.http import HttpResponseRedirect, HttpResponse
 
 
-def inicio(request):
-    return HttpResponse("<h1>Incio!</h1>")
+# def inicio(request):
+#     return HttpResponse("<h1>Incio!</h1>")
     
 urlpatterns = [
+    # path('', view=inicio),
     path('admin/', admin.site.urls),
-    path('', view=inicio),
-    path('department/', include('apps.department.urls')),
-    path('person/', include('apps.persona.urls'))
+    path('', include('apps.department.urls')),
+    path('', include('apps.persona.urls'))
 ]

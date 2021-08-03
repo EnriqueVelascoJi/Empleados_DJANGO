@@ -21,13 +21,32 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 
+#Pagina de inicio
+class InicioView(TemplateView):
+    """Vista que carga la pagina de inicio"""
+    template_name = "inicio.html"
+
+
+
 #Lista todos los empleados
 class ListAll(ListView):
     model = Person
     template_name = "Person/listPerson.html"
 
+    context_object_name = "empleados"
+
     #Paginación
-    paginate_by = 5
+    # paginate_by = 5
+
+    def get_queryset(self):
+        
+    #Recuperamos el valor del formulario
+        kword = self.request.GET.get('kword', '')
+        queryset = Person.objects.filter(
+            first_name__contains = kword
+        )
+        return queryset
+       
 
 
 #Lista los empleados por departamentos
@@ -77,7 +96,7 @@ class ListByKeyWord(ListView):
     def get_queryset(self):
         
         #Recuperamos el valor del formulario
-        kword = self.request.GET['kword']
+        kword = self.request.GET.get('kword', '')
         queryset = Person.objects.filter(
             first_name__contains = kword
         )
@@ -94,7 +113,7 @@ class ListHabilidades(ListView):
     def get_queryset(self):
 
         #Recuperar el id del fomulario
-        id_empleado = self.request.GET['id_empleado']
+        id_empleado = self.request.GET.get('id_empleado', '')
 
         #Recuperamos un empleado
         empleado = Person.objects.get(id = id_empleado)

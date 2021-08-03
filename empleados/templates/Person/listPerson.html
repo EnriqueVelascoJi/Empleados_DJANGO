@@ -1,9 +1,76 @@
-<h1>Empleados</h1>
+{% extends 'base.html' %}
+
+{% block title %}
+    Listar Empleados
+{% endblock title %}
+    
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="container mt-5">
+    <h1 class="text-center mt-5 mb-5">Empleados</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="d-flex mb-3">{% csrf_token %}      
+            <input class="form-control me-2" type="search" placeholder="Buscar por nombre" aria-label="Search" id="kword" name="kword">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+    <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th>#Id</th>
+            <th>Nombre(s)</th>
+            <th>Apellidos(s)</th>
+            <th>Trabajo</th>
+            <th>Departamento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            {% for empleado in empleados %}
+               <tr>
+                   <td>{{empleado.id}}</td>
+                   <td>{{empleado.first_name}}</td>
+                   <td>{{empleado.last_name}}</td>
+                   <td>{{empleado.job}}</td>
+                   <td>{{empleado.department.name}}</td>
+                   <td>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form>
+                                <button type="submit" class="btn btn-warning">Editar</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form>
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form action="/ver_empleado/{{empleado.id}}">
+                                <button type="submit" class="btn btn-info">Ver más</button>
+                            </form>
+                        </div>
+                    </div>
+                   </td>
+               </tr>
+            {% endfor %}
+                
+            
+        </tbody>
+      </table>
 <ul>
-{% for person in object_list %}
-    <li>{{person.first_name}}</li>
+{% for empleado in empleados %}
+    <li>{{empleado}}</li>
 {% empty %}
     <li>No employes yet.</li>
 {% endfor %}
 </ul>
+</div>
+{% endblock content %}
+    
 

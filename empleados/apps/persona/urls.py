@@ -7,6 +7,7 @@ app_name = 'person_app'
 
     
 urlpatterns = [
+    path('', views.InicioView.as_view(), name='inicio'),
     path('list_all/', views.ListAll.as_view(), name='list_all'),
     path('list_by_department/<name>/', views.ListByDepartment.as_view(), name='list_by_department'),
     path('list_by_job/<job>/', views.ListByJob.as_view(), name='list_by_job'),

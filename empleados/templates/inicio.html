@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Inicio
+{% endblock title %}
+
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<!-- Bloque de Bienvenida -->
+<div class="container mt-5">
+  <h1 class="text-center mb-5">Sistema de administración de Empleados</h1>
+  <p class="text-center mt-5 mb-5">Aplicación (CRM) de un sistema de empleados por departamento utilizando el FrameWork Django y Bootstrap 5.</p>
+  <div class="row d-flex justify-content-between">
+      <div class="col-md-5">
+          <h1 class="mb-5">Facilidades de Template</h1>
+          <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Crear un empleado</h5>
+                  
+                </div>
+                <p class="mb-1">Creación de un empleado de manera sencilla.</p>
+                <small>And some small print.</small>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">List group item heading</h5>
+                  
+                </div>
+                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                <small class="text-muted">And some muted small print.</small>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">List group item heading</h5>
+                  
+                </div>
+                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                <small class="text-muted">And some muted small print.</small>
+              </a>
+            </div>
+
+      </div>
+      <div class="col-md-6">
+          <img src="{% static 'img/inicio.png' %}" alt="inicio" class="img-fluid" width="700">
+      </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+    
+    
