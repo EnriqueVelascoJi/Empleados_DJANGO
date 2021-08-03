@@ -1,6 +1,5 @@
-from django.db.models import query
 from django.forms.forms import Form
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
 from django.views.generic import (
                                     ListView,
@@ -36,7 +35,7 @@ class ListAll(ListView):
     context_object_name = "empleados"
 
     #Paginación
-    # paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         
@@ -54,6 +53,9 @@ class ListByDepartment(ListView):
     model = Person
     template_name = "Person/listByDepartment.html"
 
+    context_object_name = "empleados"
+    paginate_by = 10
+
     #Filtrar por un departamento en específico
 
     # queryset = Person.objects.filter(
@@ -64,12 +66,20 @@ class ListByDepartment(ListView):
     def get_queryset(self):
 
         department = self.kwargs['name']
-        print(department)
+        # print(department)
+
         queryset = Person.objects.filter(
             department__name = department
         )
         return queryset
     
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        department = self.kwargs['name']
+        context['department'] = department
+        return context
+
 
 #Lista de los empleados por Job
 class ListByJob(ListView):
@@ -177,16 +187,16 @@ class EmpleadoUpdateView(UpdateView):
    #Vista de redireccionamiento una vez se haya agregado
     #Redireccionameinto a la mimsa URL
     # success_url = '.'
-    success_url = reverse_lazy('person_app:success')
+    success_url = reverse_lazy('person_app:list_all')
 
     #Intersectamos los datos del formulario antes de que sean
     #validados y/o guardados para rutinas previas
     def post(self, request, *args: str, **kwargs):
         self.object = self.get_object()
-        print('==============')
-        print(request.POST)
+        # print('==============')
+        # print(request.POST)
         first_name = request.POST['first_name']
-        print(first_name)
+        # print(first_name)
         return super().post(request, *args, **kwargs)
 
     #Validamos el formulario

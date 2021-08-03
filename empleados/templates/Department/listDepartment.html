@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Lista Departamentos
+{% endblock title %}
+
+
+{% block content %}
+    {% include 'includes/header.html' %}
+    <div class="container">
+        <h1 class="text-center mt-5 mb-5">Departamentos</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <form class="d-flex mb-3">{% csrf_token %}      
+                <input class="form-control me-2" type="search" placeholder="Buscar por nombre" aria-label="Search" id="kword" name="kword">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+        <table class="table text-center">
+            <thead class="table-dark">
+            <tr>
+                <th>#Id</th>
+                <th>Nombre</th>
+                <th>Nombre corto</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+            </thead>
+            <tbody>
+                
+                {% for departamento in departamentos %}
+                <tr>
+                    <td>{{departamento.id}}</td>
+                    <td>{{departamento.name}}</td>
+                    <td>{{departamento.short_name}}</td>
+
+                    
+                    {% if departamento.anulate %}
+                        <td>
+                          <box-icon type='solid' name='x-circle' color="red"></box-icon>
+                        </td>
+                    {% else %}
+                        <td>
+                            <box-icon type='solid' name='check-circle' color="green"></box-icon>
+                        </td>
+                    {% endif %}
+                    <td>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <form action="/list_by_department/{{departamento.name}}">
+                                    <button type="submit" class="btn btn-warning">Ver empleados <box-icon name='user-pin'></box-icon></button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                    
+                
+            </tbody>
+        </table>
+    <!-- Paginación -->
+    
+    {% if is_paginated %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1" aria-disabled="true">Atrás</a>
+                    </li>
+                {% endif %}
+                    
+                
+                {% for page in paginator.page_range %}
+                    
+                
+                    {% ifequal  page page_obj.number %} 
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">{{page}}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item" aria-current="page">
+                            <a class="page-link" href="?page={{page}}">{{page}}</a>
+                        </li>
+                    {% endifequal %}
+                    
+                    
+                {% endfor %}
+                
+
+            
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.next_page_number}}">Siguiente</a>
+                </li>
+            {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+    </div>
+
+{% endblock content %}
+    
+    

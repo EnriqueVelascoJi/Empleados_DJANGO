@@ -1,5 +1,19 @@
+
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Actualizar Empleado
+{% endblock title %}
+
+
+{% block content %}
+{% include 'includes/header.html' %}
 <h1>Detalle de un empleado</h1>
 {{ empleado }} -- {{titulo}}
 
 
 {{ empleado.first_name }}
+
+{% endblock content %}
+    

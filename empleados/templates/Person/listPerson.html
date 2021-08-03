@@ -41,18 +41,18 @@
                    <td>
                     <div class="row">
                         <div class="col-md-4">
-                            <form>
-                                <button type="submit" class="btn btn-warning">Editar</button>
+                            <form action="/update_empleado/{{empleado.id}}">
+                                <button type="submit" class="btn btn-warning">Editar  <box-icon name='edit-alt'></box-icon></button>
                             </form>
                         </div>
                         <div class="col-md-4">
                             <form>
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                <button type="submit" class="btn btn-danger">Eliminar  <box-icon name='trash' ></box-icon></button>
                             </form>
                         </div>
                         <div class="col-md-4">
                             <form action="/ver_empleado/{{empleado.id}}">
-                                <button type="submit" class="btn btn-info">Ver más</button>
+                                <button type="submit" class="btn btn-info">Ver más  <box-icon name='user-pin' ></box-icon></button>
                             </form>
                         </div>
                     </div>
@@ -64,13 +64,48 @@
         </tbody>
       </table>
 <ul>
-{% for empleado in empleados %}
-    <li>{{empleado}}</li>
-{% empty %}
-    <li>No employes yet.</li>
-{% endfor %}
-</ul>
+    <!-- Paginación -->
+    
+    {% if is_paginated %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1" aria-disabled="true">Atrás</a>
+                    </li>
+                {% endif %}
+                    
+                
+                {% for page in paginator.page_range %}
+                    
+                
+                    {% ifequal  page page_obj.number %} 
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">{{page}}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item" aria-current="page">
+                            <a class="page-link" href="?page={{page}}">{{page}}</a>
+                        </li>
+                    {% endifequal %}
+                    
+                    
+                {% endfor %}
+                
+
+            
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.next_page_number}}">Siguiente</a>
+                </li>
+            {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+        
 </div>
+
 {% endblock content %}
     
 

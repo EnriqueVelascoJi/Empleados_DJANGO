@@ -16,7 +16,7 @@ class PersonAdmin(admin.ModelAdmin):
     # inlines = [
     #     Inline,
     # ]
-    search_fields = ('name', 'last_name')
+    search_fields = ('first_name', 'last_name')
     ordering = ('-id',)
     filter_horizontal = ('habilidades',)
 
