@@ -12,13 +12,15 @@ from .forms import NewDepartmentForm
 from apps.persona.models import Person
 from .models import Department
 
+from django.urls import reverse_lazy
+
 # Create your views here.
 #Nuevo departamento
 class NewDepartmentView(FormView):
     
     template_name= 'Department/new_department.html'
     form_class = NewDepartmentForm
-    success_url = '.'
+    success_url = reverse_lazy('department_app:list_department')
 
     #Sobreescribimos la función
     def form_valid(self, form):

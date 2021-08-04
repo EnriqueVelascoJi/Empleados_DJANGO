@@ -163,7 +163,7 @@ class EmpleadoCreateView(CreateView):
     #Vista de redireccionamiento una vez se haya agregado
     #Redireccionameinto a la mimsa URL
     # success_url = '.'
-    success_url = reverse_lazy('person_app:success')
+    success_url = reverse_lazy('person_app:list_all')
 
     #Validamos el formulario
     def form_valid(self, form):
@@ -216,7 +216,7 @@ class EmpleadoDeleteView(DeleteView):
     #El templete sirve como confirmación de la elimnación
     template_name = "Person/delete.html"
 
-    success_url = reverse_lazy('person_app:success')
+    success_url = reverse_lazy('person_app:list_all')
 
     #Intersección del formulario previo a su eliminación
     def delete(self, request, *args: str, **kwargs):

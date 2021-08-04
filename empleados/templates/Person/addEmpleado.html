@@ -1,5 +1,101 @@
-<h1>Registrar Empleado</h1>
-<form method="POST">{% csrf_token %}
-    {{ form.as_p }} 
-    <button type="submit">Agregar Empleado</button>
-</form>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Nuevo Empleado
+{% endblock title %}
+
+
+{% block content %}
+    {% include 'includes/header.html' %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Registrar Empleado</h1>
+        <p class="text-center mt-5 mb-5">Registra un nuevo empleado.</p>
+        <div class="row d-flex justify-content-between">
+            <div class="col-md-6">
+                <h3 class="text-center">Formulario de Registro</h3>
+                <form method="POST">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Nombre completo</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.first_name}}
+                            </div>
+                            <div class="row">
+                                <div id="emailHelp" class="form-text">Si tiene más de un nombre también ponlo</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Apellidos</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.last_name}}
+                            </div>
+                            <div class="row">
+                                <div class="form-text">Apellido paterno y materno</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Trabajo actual</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.job}}
+                            </div>
+                            <div class="row">
+                                <div class="form-text">Indica su especialidad</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Departamento</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.department}}
+                            </div>
+                            <div class="row">
+                                <div id="emailHelp" class="form-text">Indique el departamanto de asignación</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Habilidades</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.habilidades}}
+                            </div>
+                            <div class="row">
+                                <div class="form-text">Coloca sus habilidades extras</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Hoja de vida</label>
+                            </div>
+                            <div class="row">
+                            {{form.hoja_vida}}
+                            </div>
+                            <div class="row">
+                                <div id="emailHelp" class="form-text">Coloca un pequeño resumen de su vida</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success d-grid gap-2 col-6 mx-auto mt-5">Agregar Empleado</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'img/add.png' %}" alt="inicio" class="img-fluid" width="700">
+            </div>
+        </div>
+      </div>
+
+{% endblock content %}
+    
+    

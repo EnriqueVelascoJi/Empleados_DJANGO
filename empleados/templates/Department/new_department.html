@@ -1,11 +1,82 @@
-<h1>Registrar nuevo departamento</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-<form method="POST">{% csrf_token %}
-    <h3>Datos empleado</h3>
-    <p>{{form.name}}</p>
-    <p>{{form.surname}}</p>
-    <h3>Datos del departamento</h3>
-    <p>{{form.department}}</p>
-    <p>{{form.short_name}}</p>
-    <button type="submit">Guardar</button>
-</form>
+
+{% block title %}
+    Agregar Departamento
+{% endblock title %}
+
+
+{% block content %}
+    {% include 'includes/header.html' %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Registrar Departamento</h1>
+        <p class="text-center mt-5 mb-5">Registra un nuevo departamento solo si un empleado es asignado.</p>
+        <div class="row d-flex justify-content-between">
+
+            <div class="col-md-6">
+                <img src="{% static 'img/update.png' %}" alt="inicio" class="img-fluid" width="600">
+            </div>
+            
+            <div class="col-md-6">
+                <h3 class="text-center">Formulario de Registro</h3>
+                <form method="POST">{% csrf_token %}
+                    <div class="row">
+                        <h4 class="text-center mt-5">Datos del Empleado</h4>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Nombre completo</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.name}}
+                            </div>
+                            <div class="row">
+                                <div id="emailHelp" class="form-text">Si tiene más de un nombre también ponlo</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Apellidos</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.surname}}
+                            </div>
+                            <div class="row">
+                                <div class="form-text">Apellido paterno y materno</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <h4 class="text-center mt-5">Datos del departamanto</h4>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Nombre del departamanto</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.department}}
+                            </div>
+                            <div class="row">
+                                <div class="form-text">Indica el nombre del nuevo departamanto</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="form-label">Nombre corto</label>
+                            </div>
+                            <div class="row ms-1">
+                            {{form.short_name}}
+                            </div>
+                            <div class="row">
+                                <div id="emailHelp" class="form-text">Nombre corto asociado al departamento</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success d-grid gap-2 col-6 mx-auto mt-5">Registrar Departamento</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+{% endblock content %}
+    
+    

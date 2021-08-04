@@ -1,6 +1,44 @@
-<h1>Elimar</h1>
+{% extends 'base.html' %}
 
-<form method="POST">{% csrf_token %}
-    <p>Confirme que desee eliminar</p>
-    <button type="submit">Confirmar</button>
-</form>
+
+{% block title %}
+    Eliminar Empleado
+{% endblock title %}
+
+
+{% block content %}
+    {% include 'includes/header.html' %}
+        
+    <div class="container mt-5">
+        <h1 class="text-center mt-5 mb-5">Eliminar empleado: {{object.complete_name}}</h1>
+        <div class="row justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Empleado</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Nombre (s): {{object.first_name}}</li>
+                  <li class="list-group-item">Apellidos: {{object.last_name}}</li>
+                  <li class="list-group-item">Trabajo: {{object.job}}</li>
+                  <li class="list-group-item">Departamento: {{object.department.name}}</li>
+                </ul>
+                <div class="card-bod">
+                  <a href="/ver_empleado/{{object.id}}" class="card-link">Ver más</a>
+                  <a href="{% url 'person_app:list_all' %}" class="card-link">Lista empleados</a>
+                </div>
+              </div>
+        </div>
+
+        <form method="POST" class="mt-5 mb-5">{% csrf_token %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">¿Seguro que desea eliminar al empleado?</h4>
+                <p>El empleado se eliminará completamente del sistema actual y no tendrá mas acceso a su información<hr>
+                <p class="mb-0">Confirme para eliminar al empleado</p>
+            </div>
+            <button class="btn btn-danger d-grid gap-2 col-6 mx-auto mt-5">Confirmar</button>
+        </form>
+    </div>
+
+{% endblock content %}
+    

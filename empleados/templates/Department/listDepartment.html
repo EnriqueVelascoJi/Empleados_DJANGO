@@ -10,12 +10,15 @@
     {% include 'includes/header.html' %}
     <div class="container">
         <h1 class="text-center mt-5 mb-5">Departamentos</h1>
-        <div class="row">
+        <div class="row justify-content-between">
             <div class="col-md-6">
                 <form class="d-flex mb-3">{% csrf_token %}      
                 <input class="form-control me-2" type="search" placeholder="Buscar por nombre" aria-label="Search" id="kword" name="kword">
                     <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
+            </div>
+            <div class="col-md-4">
+                <form action="/new_department"><button class="btn btn-success">Nuevo</button></form>
             </div>
         </div>
         <table class="table text-center">

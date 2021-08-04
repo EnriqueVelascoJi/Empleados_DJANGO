@@ -17,29 +17,29 @@
       <div class="col-md-5">
           <h1 class="mb-5">Facilidades de Template</h1>
           <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+              <a href="{% url 'person_app:add_empleado' %}" class="list-group-item list-group-item-action active" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">Crear un empleado</h5>
+                  <h5 class="mb-1">Registrar un empleado</h5>
                   
                 </div>
-                <p class="mb-1">Creación de un empleado de manera sencilla.</p>
-                <small>And some small print.</small>
+                <p class="mb-1">Registro de un empleado de manera sencilla.</p>
+                <small>Toma los datos del empleado.</small>
               </a>
-              <a href="#" class="list-group-item list-group-item-action">
+              <a href="{% url 'department_app:new_department' %}" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">List group item heading</h5>
+                  <h5 class="mb-1">Registrar un departamento</h5>
                   
                 </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-muted">And some muted small print.</small>
+                <p class="mb-1">Registro de un nuevo departamento</p>
+                <small class="text-muted">Solo si un empleado fue asignado a dicho departamento.</small>
               </a>
-              <a href="#" class="list-group-item list-group-item-action">
+              <a href="/admin" target="_blank" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">List group item heading</h5>
+                  <h5 class="mb-1">Administrador de Interfaz</h5>
                   
                 </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-muted">And some muted small print.</small>
+                <p class="mb-1">Dirígete al administrador por defecto.</p>
+                <small class="text-muted">Administra tu sistema de manera sencilla.</small>
               </a>
             </div>
 

@@ -3,23 +3,42 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="/">Empleados</a>
+      <a class="navbar-brand" href="/">Sistema</a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'person_app:list_all' %}">Listar</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'person_app:list_all' %}">Empleados</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'department_app:list_department' %}">Departamentos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Administrar</a>
+            <a class="nav-link" href="/admin" target="_blank">Administrar</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Registrar</button>
-        </form>
+          <button class="btn btn-outline-success" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar</button>
       </div>
     </div>
   </nav>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registro de actividad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Selecciona un nuevo modelo de registro.
+        </div>
+        <div class="modal-footer">
+          <form action="/add_empleado">
+            <button type="submit" class="btn btn-info" data-bs-dismiss="modal">Empleado</button>
+          </form>
+          <form action="/new_department">
+            <button type="submit" class="btn btn-warning" data-bs-dismiss="modal">Departamento</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
