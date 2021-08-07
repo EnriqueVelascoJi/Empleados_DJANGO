@@ -1,4 +1,5 @@
 from django import forms
+from apps.persona.models import Person
 
 #Formulario de registro debido a una necesidad específica
     #Al agregar un nuevo departamento
@@ -9,6 +10,9 @@ class NewDepartmentForm(forms.Form):
     """NewDepartmentForm definition."""
 
     # TODO: Define form fields here
+    # name = forms.CharField(max_length=50)
+    # surname = forms.CharField(max_length=50)
+
     name = forms.CharField(max_length=50)
     surname = forms.CharField(max_length=50)
     department = forms.CharField(max_length=50)
