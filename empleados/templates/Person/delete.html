@@ -13,15 +13,15 @@
         <h1 class="text-center mt-5 mb-5">Eliminar empleado: {{object.complete_name}}</h1>
         <div class="row justify-content-center">
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="/media/{{object.avatar}}" class="card-img-top" alt="{{object.first_name}}">
                 <div class="card-body">
                   <h5 class="card-title">Empleado</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Nombre (s): {{object.first_name}}</li>
-                  <li class="list-group-item">Apellidos: {{object.last_name}}</li>
-                  <li class="list-group-item">Trabajo: {{object.job}}</li>
-                  <li class="list-group-item">Departamento: {{object.department.name}}</li>
+                  <li class="list-group-item"><span class="fw-bold">Nombre (s):</span> {{object.first_name}}</li>
+                  <li class="list-group-item"><span class="fw-bold">Apellidos:</span> {{object.last_name}}</li>
+                  <li class="list-group-item"><span class="fw-bold">Trabajo:</span> {{object.get_job_display}}</li>
+                  <li class="list-group-item"><span class="fw-bold">Departamento:</span> {{object.department.name}}</li>
                 </ul>
                 <div class="card-bod">
                   <a href="/ver_empleado/{{object.id}}" class="card-link">Ver más</a>

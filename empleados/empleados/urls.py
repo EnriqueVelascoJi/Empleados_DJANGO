@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponseRedirect, HttpResponse
 
+#Importamos el archivo de configuración
+from django.conf import settings
+from django.conf.urls.static import static
 
 # def inicio(request):
 #     return HttpResponse("<h1>Incio!</h1>")
@@ -26,4 +29,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.department.urls')),
     path('', include('apps.persona.urls'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

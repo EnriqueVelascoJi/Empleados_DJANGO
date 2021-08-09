@@ -31,7 +31,11 @@ class Person(models.Model):
         ('0', 'Contador'),
         ('1', 'Administrador'),
         ('2', 'Economista'),
-        ('3', 'Otro')
+        ('3', 'Sistemas'),
+        ('4', 'Soporte'),
+        ('5', 'Redes'),
+        ('6', 'Web'),
+        ('7', 'Apps')
     ]
     first_name = models.CharField('Name', max_length=50)
     last_name = models.CharField('Last Name', max_length=50)
@@ -39,7 +43,7 @@ class Person(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     habilidades = models.ManyToManyField(Habilidades)
     hoja_vida = RichTextField()
-    # avatar = models.ImageField(, upload_to=None, height_field=None, width_field=None, max_length=None)
+    avatar = models.ImageField('Avatar', upload_to='empleados', blank=True, null=True)
 
     class Meta:
         """Meta definition for Person."""

@@ -138,6 +138,7 @@ class EmpleadoDetailView(DetailView):
     template_name = "Person/detailPerson.html"
 
     context_object_name = 'empleado'
+    
 
     #slug -- Mejora en el posicionamiento (SEO)
     
@@ -145,6 +146,7 @@ class EmpleadoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo'] = 'Empelado del Mes'
+        print(context['object'].avatar)
         return context
 
 
